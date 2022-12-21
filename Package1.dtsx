@@ -1,0 +1,871 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="12/21/2022 5:43:48 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LAPTOP-3BH3FB6H"
+  DTS:CreatorName="LAPTOP-3BH3FB6H\amira"
+  DTS:DTSID="{2AAB2CBA-545E-4981-87AE-C9EC601FBBFF}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.521.0"
+  DTS:LocaleID="2057"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="18"
+  DTS:VersionGUID="{30E242F3-1715-40EE-8AF5-E338BAE5EAC1}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Connection Manager]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{FAEFA28F-932D-4C79-B60B-99D007061AD5}"
+      DTS:ObjectName="Excel Connection Manager">
+      <DTS:PropertyExpression
+        DTS:Name="ExcelFilePath">@[User::strExcelFile]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="0"
+          DTS:ConnectRetryInterval="0"
+          DTS:ConnectionString="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Users\amira\OneDrive\Bureau\BI\Factures\D001.xls;Extended Properties=&quot;EXCEL 8.0;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ExcelSchema]"
+      DTS:CreationName="ADO.NET:System.Data.OleDb.OleDbConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:DTSID="{E14A34C0-474A-47F9-8F6D-0055B749A960}"
+      DTS:ObjectName="ExcelSchema">
+      <DTS:PropertyExpression
+        DTS:Name="ServerName">@[User::strExcelFile]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=C:\Users\amira\OneDrive\Bureau\BI\Factures\D001.xls;Provider=Microsoft.ACE.OLEDB.12.0;Extended Properties=Excel 12.0;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{1B6A3C95-A726-4379-AFE6-A820121A12FA}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FileName">
+      <DTS:VariableValue
+        DTS:DataType="8">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{84FA31FC-E601-4E8F-B968-70F98692FA1C}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="strExcelFile">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\Users\amira\OneDrive\Bureau\BI\Factures\D001.xls</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Loop files"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{0c8e0a95-8605-4fc1-bd2e-40c3700f1b89}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Loop files">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachFileEnumerator"
+        DTS:DTSID="{7a02aff3-6083-4ffb-bc40-195ab6d4152e}"
+        DTS:ObjectName="{C0F670B3-99BE-4A1C-B3D4-599C7BB8A7CC}">
+        <DTS:ObjectData>
+          <ForEachFileEnumeratorProperties>
+            <FEFEProperty
+              Folder="C:\Users\amira\OneDrive\Bureau\BI\Factures" />
+            <FEFEProperty
+              FileSpec="*.xls" />
+            <FEFEProperty
+              FileNameRetrievalType="0" />
+            <FEFEProperty
+              Recurse="0" />
+          </ForEachFileEnumeratorProperties>
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Loop files\load files"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:DelayValidation="True"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{7e84453c-a24b-437d-be1b-87dd64805e97}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="load files"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Loop files\load files\Derived Column"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="Derived Column"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Loop files\load files\Derived Column.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Loop files\load files\Derived Column.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\Loop files\load files\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Loop files\load files\Derived Column.Outputs[Derived Column Output].Columns[Derived Column 1]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          length="1"
+                          lineageId="Package\Loop files\load files\Derived Column.Outputs[Derived Column Output].Columns[Derived Column 1]"
+                          name="Derived Column 1"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">[LEFT]([RIGHT](@[User::strExcelFile],5),1)</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">LEFT(RIGHT(@[User::strExcelFile],5),1)</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Loop files\load files\Derived Column.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\Loop files\load files\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Loop files\load files\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Loop files\load files\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Loop files\load files\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Loop files\load files\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Loop files\load files\Excel Source"
+                  componentClassID="Microsoft.ExcelSource"
+                  contactInfo="Excel Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Excel Source"
+                  name="Excel Source"
+                  usesDispositions="true"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">Feuil1$</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.String"
+                      description="The mapping from parameters in the SQL command to variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Loop files\load files\Excel Source.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[Excel Connection Manager]"
+                      connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output]"
+                      name="Excel Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].Columns[PrixCatalogue]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].ExternalColumns[PrixCatalogue]"
+                          lineageId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].Columns[PrixCatalogue]"
+                          name="PrixCatalogue"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].Columns[Remise]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].ExternalColumns[Remise]"
+                          lineageId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].Columns[Remise]"
+                          name="Remise"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].Columns[CA]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].ExternalColumns[CA]"
+                          lineageId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].Columns[CA]"
+                          name="CA"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].Columns[Marge]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].ExternalColumns[Marge]"
+                          lineageId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].Columns[Marge]"
+                          name="Marge"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].Columns[CoutDirectMatiere]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].ExternalColumns[CoutDirectMatiere]"
+                          lineageId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].Columns[CoutDirectMatiere]"
+                          name="CoutDirectMatiere"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].Columns[CoutDirectMainOeuvre]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].ExternalColumns[CoutDirectMainOeuvre]"
+                          lineageId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].Columns[CoutDirectMainOeuvre]"
+                          name="CoutDirectMainOeuvre"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].Columns[CoutIndirect]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].ExternalColumns[CoutIndirect]"
+                          lineageId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].Columns[CoutIndirect]"
+                          name="CoutIndirect"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].Columns[Quantite]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].ExternalColumns[Quantite]"
+                          lineageId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].Columns[Quantite]"
+                          name="Quantite"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].Columns[NumFacture]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].ExternalColumns[NumFacture]"
+                          length="255"
+                          lineageId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].Columns[NumFacture]"
+                          name="NumFacture"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].Columns[ProduitCode]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].ExternalColumns[ProduitCode]"
+                          length="255"
+                          lineageId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].Columns[ProduitCode]"
+                          name="ProduitCode"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].Columns[ClientCode]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].ExternalColumns[ClientCode]"
+                          length="255"
+                          lineageId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].Columns[ClientCode]"
+                          name="ClientCode"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].Columns[Date]"
+                          dataType="date"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].ExternalColumns[Date]"
+                          lineageId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].Columns[Date]"
+                          name="Date"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].ExternalColumns[PrixCatalogue]"
+                          dataType="r8"
+                          name="PrixCatalogue" />
+                        <externalMetadataColumn
+                          refId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].ExternalColumns[Remise]"
+                          dataType="r8"
+                          name="Remise" />
+                        <externalMetadataColumn
+                          refId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].ExternalColumns[CA]"
+                          dataType="r8"
+                          name="CA" />
+                        <externalMetadataColumn
+                          refId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].ExternalColumns[Marge]"
+                          dataType="r8"
+                          name="Marge" />
+                        <externalMetadataColumn
+                          refId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].ExternalColumns[CoutDirectMatiere]"
+                          dataType="r8"
+                          name="CoutDirectMatiere" />
+                        <externalMetadataColumn
+                          refId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].ExternalColumns[CoutDirectMainOeuvre]"
+                          dataType="r8"
+                          name="CoutDirectMainOeuvre" />
+                        <externalMetadataColumn
+                          refId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].ExternalColumns[CoutIndirect]"
+                          dataType="r8"
+                          name="CoutIndirect" />
+                        <externalMetadataColumn
+                          refId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].ExternalColumns[Quantite]"
+                          dataType="r8"
+                          name="Quantite" />
+                        <externalMetadataColumn
+                          refId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].ExternalColumns[NumFacture]"
+                          dataType="wstr"
+                          length="255"
+                          name="NumFacture" />
+                        <externalMetadataColumn
+                          refId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].ExternalColumns[ProduitCode]"
+                          dataType="wstr"
+                          length="255"
+                          name="ProduitCode" />
+                        <externalMetadataColumn
+                          refId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].ExternalColumns[ClientCode]"
+                          dataType="wstr"
+                          length="255"
+                          name="ClientCode" />
+                        <externalMetadataColumn
+                          refId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].ExternalColumns[Date]"
+                          dataType="date"
+                          name="Date" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Error Output]"
+                      isErrorOut="true"
+                      name="Excel Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Error Output].Columns[PrixCatalogue]"
+                          dataType="r8"
+                          lineageId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Error Output].Columns[PrixCatalogue]"
+                          name="PrixCatalogue" />
+                        <outputColumn
+                          refId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Error Output].Columns[Remise]"
+                          dataType="r8"
+                          lineageId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Error Output].Columns[Remise]"
+                          name="Remise" />
+                        <outputColumn
+                          refId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Error Output].Columns[CA]"
+                          dataType="r8"
+                          lineageId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Error Output].Columns[CA]"
+                          name="CA" />
+                        <outputColumn
+                          refId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Error Output].Columns[Marge]"
+                          dataType="r8"
+                          lineageId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Error Output].Columns[Marge]"
+                          name="Marge" />
+                        <outputColumn
+                          refId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Error Output].Columns[CoutDirectMatiere]"
+                          dataType="r8"
+                          lineageId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Error Output].Columns[CoutDirectMatiere]"
+                          name="CoutDirectMatiere" />
+                        <outputColumn
+                          refId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Error Output].Columns[CoutDirectMainOeuvre]"
+                          dataType="r8"
+                          lineageId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Error Output].Columns[CoutDirectMainOeuvre]"
+                          name="CoutDirectMainOeuvre" />
+                        <outputColumn
+                          refId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Error Output].Columns[CoutIndirect]"
+                          dataType="r8"
+                          lineageId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Error Output].Columns[CoutIndirect]"
+                          name="CoutIndirect" />
+                        <outputColumn
+                          refId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Error Output].Columns[Quantite]"
+                          dataType="r8"
+                          lineageId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Error Output].Columns[Quantite]"
+                          name="Quantite" />
+                        <outputColumn
+                          refId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Error Output].Columns[NumFacture]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Error Output].Columns[NumFacture]"
+                          name="NumFacture" />
+                        <outputColumn
+                          refId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Error Output].Columns[ProduitCode]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Error Output].Columns[ProduitCode]"
+                          name="ProduitCode" />
+                        <outputColumn
+                          refId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Error Output].Columns[ClientCode]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Error Output].Columns[ClientCode]"
+                          name="ClientCode" />
+                        <outputColumn
+                          refId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Error Output].Columns[Date]"
+                          dataType="date"
+                          lineageId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Error Output].Columns[Date]"
+                          name="Date" />
+                        <outputColumn
+                          refId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Loop files\load files\OLE DB Destination"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="OLE DB Destination"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[Factures_SA]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Loop files\load files\OLE DB Destination.Connections[OleDbConnection]"
+                      connectionManagerID="{B5E80171-7B28-41ED-8998-00C24E2A5032}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[LocalHost.SA_Ventes]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Loop files\load files\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Loop files\load files\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PrixCatalogue]"
+                          cachedDataType="r8"
+                          cachedName="PrixCatalogue"
+                          externalMetadataColumnId="Package\Loop files\load files\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PrixCatalogue]"
+                          lineageId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].Columns[PrixCatalogue]" />
+                        <inputColumn
+                          refId="Package\Loop files\load files\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Remise]"
+                          cachedDataType="r8"
+                          cachedName="Remise"
+                          externalMetadataColumnId="Package\Loop files\load files\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Remise]"
+                          lineageId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].Columns[Remise]" />
+                        <inputColumn
+                          refId="Package\Loop files\load files\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CA]"
+                          cachedDataType="r8"
+                          cachedName="CA"
+                          externalMetadataColumnId="Package\Loop files\load files\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CA]"
+                          lineageId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].Columns[CA]" />
+                        <inputColumn
+                          refId="Package\Loop files\load files\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Marge]"
+                          cachedDataType="r8"
+                          cachedName="Marge"
+                          externalMetadataColumnId="Package\Loop files\load files\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Marge]"
+                          lineageId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].Columns[Marge]" />
+                        <inputColumn
+                          refId="Package\Loop files\load files\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CoutDirectMatiere]"
+                          cachedDataType="r8"
+                          cachedName="CoutDirectMatiere"
+                          externalMetadataColumnId="Package\Loop files\load files\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CoutDirectMatiere]"
+                          lineageId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].Columns[CoutDirectMatiere]" />
+                        <inputColumn
+                          refId="Package\Loop files\load files\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CoutDirectMainOeuvre]"
+                          cachedDataType="r8"
+                          cachedName="CoutDirectMainOeuvre"
+                          externalMetadataColumnId="Package\Loop files\load files\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CoutDirectMainOeuvre]"
+                          lineageId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].Columns[CoutDirectMainOeuvre]" />
+                        <inputColumn
+                          refId="Package\Loop files\load files\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CoutIndirect]"
+                          cachedDataType="r8"
+                          cachedName="CoutIndirect"
+                          externalMetadataColumnId="Package\Loop files\load files\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CoutIndirect]"
+                          lineageId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].Columns[CoutIndirect]" />
+                        <inputColumn
+                          refId="Package\Loop files\load files\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Quantite]"
+                          cachedDataType="r8"
+                          cachedName="Quantite"
+                          externalMetadataColumnId="Package\Loop files\load files\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Quantite]"
+                          lineageId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].Columns[Quantite]" />
+                        <inputColumn
+                          refId="Package\Loop files\load files\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[NumFacture]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="NumFacture"
+                          externalMetadataColumnId="Package\Loop files\load files\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NumFacture]"
+                          lineageId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].Columns[NumFacture]" />
+                        <inputColumn
+                          refId="Package\Loop files\load files\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ProduitCode]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="ProduitCode"
+                          externalMetadataColumnId="Package\Loop files\load files\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ProduitCode]"
+                          lineageId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].Columns[ProduitCode]" />
+                        <inputColumn
+                          refId="Package\Loop files\load files\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ClientCode]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="ClientCode"
+                          externalMetadataColumnId="Package\Loop files\load files\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ClientCode]"
+                          lineageId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].Columns[ClientCode]" />
+                        <inputColumn
+                          refId="Package\Loop files\load files\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Date]"
+                          cachedDataType="date"
+                          cachedName="Date"
+                          externalMetadataColumnId="Package\Loop files\load files\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Date]"
+                          lineageId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].Columns[Date]" />
+                        <inputColumn
+                          refId="Package\Loop files\load files\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Derived Column 1]"
+                          cachedDataType="wstr"
+                          cachedLength="1"
+                          cachedName="Derived Column 1"
+                          externalMetadataColumnId="Package\Loop files\load files\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CodeSite]"
+                          lineageId="Package\Loop files\load files\Derived Column.Outputs[Derived Column Output].Columns[Derived Column 1]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Loop files\load files\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PrixCatalogue]"
+                          dataType="r8"
+                          name="PrixCatalogue" />
+                        <externalMetadataColumn
+                          refId="Package\Loop files\load files\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Remise]"
+                          dataType="r8"
+                          name="Remise" />
+                        <externalMetadataColumn
+                          refId="Package\Loop files\load files\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CA]"
+                          dataType="r8"
+                          name="CA" />
+                        <externalMetadataColumn
+                          refId="Package\Loop files\load files\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Marge]"
+                          dataType="r8"
+                          name="Marge" />
+                        <externalMetadataColumn
+                          refId="Package\Loop files\load files\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CoutDirectMatiere]"
+                          dataType="r8"
+                          name="CoutDirectMatiere" />
+                        <externalMetadataColumn
+                          refId="Package\Loop files\load files\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CoutDirectMainOeuvre]"
+                          dataType="r8"
+                          name="CoutDirectMainOeuvre" />
+                        <externalMetadataColumn
+                          refId="Package\Loop files\load files\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CoutIndirect]"
+                          dataType="r8"
+                          name="CoutIndirect" />
+                        <externalMetadataColumn
+                          refId="Package\Loop files\load files\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Quantite]"
+                          dataType="r8"
+                          name="Quantite" />
+                        <externalMetadataColumn
+                          refId="Package\Loop files\load files\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NumFacture]"
+                          dataType="wstr"
+                          length="255"
+                          name="NumFacture" />
+                        <externalMetadataColumn
+                          refId="Package\Loop files\load files\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ProduitCode]"
+                          dataType="wstr"
+                          length="255"
+                          name="ProduitCode" />
+                        <externalMetadataColumn
+                          refId="Package\Loop files\load files\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ClientCode]"
+                          dataType="wstr"
+                          length="255"
+                          name="ClientCode" />
+                        <externalMetadataColumn
+                          refId="Package\Loop files\load files\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Date]"
+                          dataType="dbTimeStamp"
+                          name="Date" />
+                        <externalMetadataColumn
+                          refId="Package\Loop files\load files\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CodeSite]"
+                          dataType="wstr"
+                          length="4"
+                          name="CodeSite" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Loop files\load files\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Loop files\load files\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Loop files\load files\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Loop files\load files\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Loop files\load files\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Loop files\load files\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Loop files\load files.Paths[Derived Column Output]"
+                  endId="Package\Loop files\load files\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  name="Derived Column Output"
+                  startId="Package\Loop files\load files\Derived Column.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\Loop files\load files.Paths[Excel Source Output]"
+                  endId="Package\Loop files\load files\Derived Column.Inputs[Derived Column Input]"
+                  name="Excel Source Output"
+                  startId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{6380AF48-7FB1-4448-AD26-8ADDAEA686B9}"
+          DTS:ObjectName="{6380AF48-7FB1-4448-AD26-8ADDAEA686B9}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::strExcelFile" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="120,41.6"
+          Id="Package\Loop files\load files"
+          TopLeft="134.685727982619,125.635299211885" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="294.4,480.8"
+          Size="294.4,524"
+          Id="Package\Loop files"
+          TopLeft="60,60" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Loop files\load files">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="152.8,41.6"
+          Id="Package\Loop files\load files\Derived Column"
+          TopLeft="190.714288962131,204.941179344811" />
+        <NodeLayout
+          Size="170.4,41.6"
+          Id="Package\Loop files\load files\OLE DB Destination"
+          TopLeft="540,135" />
+        <NodeLayout
+          Size="138.4,41.6"
+          Id="Package\Loop files\load files\Excel Source"
+          TopLeft="61,107" />
+        <EdgeLayout
+          Id="Package\Loop files\load files.Paths[Derived Column Output]"
+          TopLeft="291.247622295464,204.941179344811">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="333.952377704536,-28.3411793448108"
+              Start="0,0"
+              End="333.952377704536,-20.8411793448108">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-7.51268632452418" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-7.51268632452418"
+                    Point2="0,-11.5126863245242"
+                    Point3="4,-11.5126863245242" />
+                  <mssgle:LineSegment
+                    End="329.952377704536,-11.5126863245242" />
+                  <mssgle:CubicBezierSegment
+                    Point1="329.952377704536,-11.5126863245242"
+                    Point2="333.952377704536,-11.5126863245242"
+                    Point3="333.952377704536,-15.5126863245242" />
+                  <mssgle:LineSegment
+                    End="333.952377704536,-20.8411793448108" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Loop files\load files.Paths[Excel Source Output]"
+          TopLeft="130.2,148.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="136.914288962131,56.3411793448108"
+              Start="0,0"
+              End="136.914288962131,48.8411793448108">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.1705896724054" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,24.1705896724054"
+                    Point2="0,28.1705896724054"
+                    Point3="4,28.1705896724054" />
+                  <mssgle:LineSegment
+                    End="132.914288962131,28.1705896724054" />
+                  <mssgle:CubicBezierSegment
+                    Point1="132.914288962131,28.1705896724054"
+                    Point2="136.914288962131,28.1705896724054"
+                    Point3="136.914288962131,32.1705896724054" />
+                  <mssgle:LineSegment
+                    End="136.914288962131,48.8411793448108" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
