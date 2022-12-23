@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="1"
-  DTS:VersionGUID="{EA1EC5BC-3436-474E-9367-C529E33C7220}">
+  DTS:VersionBuild="2"
+  DTS:VersionGUID="{CEB82BC3-ABB0-4822-B312-CE27C4F3B56D}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -65,13 +65,13 @@
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
         <NodeLayout
-          Size="164,41.6"
-          Id="Package\Execute EL_SI_SA"
-          TopLeft="109.285716146839,103.235295565483" />
-        <NodeLayout
           Size="172,41.6"
           Id="Package\Execute Facture_SA"
           TopLeft="147.857145375135,226.352944350985" />
+        <NodeLayout
+          Size="164,41.6"
+          Id="Package\Execute EL_SI_SA"
+          TopLeft="170.714288621533,100.94117788625" />
       </GraphLayout>
     </LayoutInfo>
   </Package>

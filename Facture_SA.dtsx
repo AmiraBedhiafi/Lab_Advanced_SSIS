@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="20"
-  DTS:VersionGUID="{17271CEB-2193-4E32-920B-49BC5E80CB29}">
+  DTS:VersionBuild="22"
+  DTS:VersionGUID="{FC01DC10-ED2A-47DD-A689-E0D8DCA75B7A}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -130,13 +130,13 @@
                       synchronousInputId="Package\Loop files\load files\Derived Column.Inputs[Derived Column Input]">
                       <outputColumns>
                         <outputColumn
-                          refId="Package\Loop files\load files\Derived Column.Outputs[Derived Column Output].Columns[Derived Column 1]"
+                          refId="Package\Loop files\load files\Derived Column.Outputs[Derived Column Output].Columns[CodeSite]"
                           dataType="wstr"
                           errorOrTruncationOperation="Computation"
                           errorRowDisposition="FailComponent"
                           length="1"
-                          lineageId="Package\Loop files\load files\Derived Column.Outputs[Derived Column Output].Columns[Derived Column 1]"
-                          name="Derived Column 1"
+                          lineageId="Package\Loop files\load files\Derived Column.Outputs[Derived Column Output].Columns[CodeSite]"
+                          name="CodeSite"
                           truncationRowDisposition="FailComponent">
                           <properties>
                             <property
@@ -633,12 +633,12 @@
                           externalMetadataColumnId="Package\Loop files\load files\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Date]"
                           lineageId="Package\Loop files\load files\Excel Source.Outputs[Excel Source Output].Columns[Date]" />
                         <inputColumn
-                          refId="Package\Loop files\load files\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Derived Column 1]"
+                          refId="Package\Loop files\load files\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CodeSite]"
                           cachedDataType="wstr"
                           cachedLength="1"
-                          cachedName="Derived Column 1"
+                          cachedName="CodeSite"
                           externalMetadataColumnId="Package\Loop files\load files\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CodeSite]"
-                          lineageId="Package\Loop files\load files\Derived Column.Outputs[Derived Column Output].Columns[Derived Column 1]" />
+                          lineageId="Package\Loop files\load files\Derived Column.Outputs[Derived Column Output].Columns[CodeSite]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -696,7 +696,7 @@
                         <externalMetadataColumn
                           refId="Package\Loop files\load files\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CodeSite]"
                           dataType="wstr"
-                          length="4"
+                          length="255"
                           name="CodeSite" />
                       </externalMetadataColumns>
                     </input>
@@ -848,7 +848,7 @@
     design-time-name="Package\Loop files\load files">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="170.4,41.6"
           Id="Package\Loop files\load files\OLE DB Destination"
@@ -867,34 +867,32 @@
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="136.914288962131,56.3411793448108"
+              EndConnector="112.780955628798,56.341179344811"
               Start="0,0"
-              End="136.914288962131,48.8411793448108">
+              End="112.780955628798,48.841179344811">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,24.1705896724054" />
+                    End="0,29.454399756038" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,24.1705896724054"
-                    Point2="0,28.1705896724054"
-                    Point3="4,28.1705896724054" />
+                    Point1="0,29.454399756038"
+                    Point2="0,33.454399756038"
+                    Point3="4,33.454399756038" />
                   <mssgle:LineSegment
-                    End="132.914288962131,28.1705896724054" />
+                    End="108.780955628798,33.454399756038" />
                   <mssgle:CubicBezierSegment
-                    Point1="132.914288962131,28.1705896724054"
-                    Point2="136.914288962131,28.1705896724054"
-                    Point3="136.914288962131,32.1705896724054" />
+                    Point1="108.780955628798,33.454399756038"
+                    Point2="112.780955628798,33.454399756038"
+                    Point3="112.780955628798,37.454399756038" />
                   <mssgle:LineSegment
-                    End="136.914288962131,48.8411793448108" />
+                    End="112.780955628798,48.841179344811" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -928,13 +926,24 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Loop files\load files\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>
